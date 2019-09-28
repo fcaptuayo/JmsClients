@@ -1,0 +1,38 @@
+version: '3'
+services:
+  activemq:
+    image: ivonet/activemq
+    container_name: activemq
+    ports:
+      # mqtt
+      - "1883:1883"
+      # amqp
+      - "5672:5672"
+      # ui
+      - "8161:8161"
+      # stomp
+      - "61613:61613"
+      # ws
+      - "61614:61614"
+      # jms
+      - "61616:61616"
+    environment:
+      - ACTIVEMQ_NAME=amqp-srv1
+      - ACTIVEMQ_MIN_MEMORY=512
+      - ACTIVEMQ_MAX_MEMORY=2048
+      - ACTIVEMQ_REMOVE_DEFAULT_ACCOUNT=true
+      - ACTIVEMQ_ADMIN_LOGIN=admin
+      - ACTIVEMQ_ADMIN_PASSWORD=secret
+      - ACTIVEMQ_ENABLED_SCHEDULER=true
+      - ACTIVEMQ_STATIC_TOPICS=topic1;topic2;topic3
+      - ACTIVEMQ_STATIC_QUEUES=queue1;queue2;queue3
+      - ACTIVEMQ_JMX_LOGIN=jmx_login
+      - ACTIVEMQ_JMX_PASSWORD=jmx_password
+      - ACTIVEMQ_READ_LOGIN=consumer_login
+      - ACTIVEMQ_READ_PASSWORD=consumer_password
+      - ACTIVEMQ_WRITE_LOGIN=producer_login
+      - ACTIVEMQ_WRITE_PASSWORD=producer_password
+    volumes:
+      - /Users/fredygonzalocaptuayonovoa/project/git-fcaptuayo/JmsClients/applications/activemq/volumes/data:/data/activemq
+      - /Users/fredygonzalocaptuayonovoa/project/git-fcaptuayo/JmsClients/applications/activemq/volumes/logs:/var/log/activemq
+      - /Users/fredygonzalocaptuayonovoa/project/git-fcaptuayo/JmsClients/applications/activemq/volumes/config:/var/activemq/conf
